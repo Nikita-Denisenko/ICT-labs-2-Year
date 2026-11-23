@@ -1,0 +1,171 @@
+﻿<Window x:Class="WpfLab.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Currency Studio"
+        Width="900"
+        Height="720"
+        MinWidth="650"
+        MinHeight="600"
+        ResizeMode="CanResize"
+        WindowStartupLocation="CenterScreen"
+        Background="#101322"
+        Foreground="#F4F5FF"
+        FontFamily="Segoe UI">
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock Text="CURRENCY STUDIO"
+                       FontSize="13"
+                       FontWeight="Bold"
+                       Foreground="#A78BFA"/>
+
+            <TextBlock Text="Конвертер валют"
+                       FontSize="32"
+                       FontWeight="Bold"
+                       Margin="0,8,0,0"/>
+
+            <TextBlock Text="Перевод рублей в иностранную валюту"
+                       FontSize="15"
+                       Foreground="#9CA3B8"
+                       Margin="0,5,0,0"/>
+        </StackPanel>
+
+        <Border Grid.Row="1"
+                Background="#1B2033"
+                CornerRadius="24"
+                Padding="24">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Margin="0,0,0,16">
+                    <TextBlock Text="Сумма в рублях"
+                               FontSize="15"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,10"/>
+
+                    <TextBox x:Name="AmountTextBox"
+                             Text="1000"
+                             Height="50"
+                             FontSize="18"
+                             Padding="14,10"
+                             Background="#292F46"
+                             Foreground="White"
+                             BorderBrush="#454D6B"
+                             BorderThickness="1"
+                             VerticalContentAlignment="Center"/>
+                </StackPanel>
+
+                <GroupBox Grid.Row="1"
+                          Header="Выберите валюту"
+                          Foreground="#F4F5FF"
+                          FontSize="15"
+                          FontWeight="SemiBold"
+                          BorderBrush="#454D6B"
+                          Background="#222940"
+                          Padding="16"
+                          Margin="0,0,0,16">
+
+                    <WrapPanel>
+                        <RadioButton x:Name="EuroRadioButton"
+                                     Content="Евро (€)"
+                                     GroupName="Currency"
+                                     FontSize="16"
+                                     Foreground="White"
+                                     Margin="0,8,30,8"
+                                     Checked="CurrencyRadioButton_Checked"/>
+
+                        <RadioButton x:Name="DollarRadioButton"
+                                     Content="Доллары ($)"
+                                     GroupName="Currency"
+                                     IsChecked="True"
+                                     FontSize="16"
+                                     Foreground="White"
+                                     Margin="0,8,30,8"
+                                     Checked="CurrencyRadioButton_Checked"/>
+
+                        <RadioButton x:Name="HryvniaRadioButton"
+                                     Content="Гривны (₴)"
+                                     GroupName="Currency"
+                                     FontSize="16"
+                                     Foreground="White"
+                                     Margin="0,8,0,8"
+                                     Checked="CurrencyRadioButton_Checked"/>
+                    </WrapPanel>
+                </GroupBox>
+
+                <Border Grid.Row="2"
+                        Background="#252B42"
+                        CornerRadius="12"
+                        Padding="16"
+                        Margin="0,0,0,16">
+
+                    <TextBlock x:Name="RateInfoTextBlock"
+                               Text="Учебный курс: 1 USD = 90 RUB"
+                               FontSize="14"
+                               Foreground="#9CA3B8"
+                               TextWrapping="Wrap"/>
+                </Border>
+
+                <Button Grid.Row="3"
+                        Content="Конвертировать"
+                        Click="ConvertButton_Click"
+                        Height="52"
+                        Margin="0,0,0,16"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        Background="#7C5CFC"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        HorizontalAlignment="Stretch"/>
+
+                <Border Grid.Row="4"
+                        Background="#252B42"
+                        CornerRadius="18"
+                        Padding="20">
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="РЕЗУЛЬТАТ КОНВЕРТАЦИИ"
+                                   FontSize="12"
+                                   FontWeight="Bold"
+                                   Foreground="#A78BFA"/>
+
+                        <TextBlock x:Name="ResultTextBlock"
+                                   Grid.Row="1"
+                                   Text="0.00 USD"
+                                   FontSize="36"
+                                   FontWeight="Bold"
+                                   Foreground="#5EEAD4"
+                                   VerticalAlignment="Center"
+                                   TextWrapping="Wrap"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+
+        <TextBlock Grid.Row="2"
+                   Text="CURRENCY STUDIO  •  RUB → EUR / USD / UAH"
+                   Foreground="#68708C"
+                   FontSize="11"
+                   HorizontalAlignment="Center"
+                   Margin="0,14,0,0"/>
+    </Grid>
+</Window>

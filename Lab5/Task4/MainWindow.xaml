@@ -1,0 +1,194 @@
+﻿<Window x:Class="WpfLab.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Temperature Studio"
+        Width="900"
+        Height="720"
+        MinWidth="650"
+        MinHeight="600"
+        ResizeMode="CanResize"
+        WindowStartupLocation="CenterScreen"
+        Background="#101322"
+        Foreground="#F4F5FF"
+        FontFamily="Segoe UI">
+
+    <Window.Resources>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#292F46"/>
+            <Setter Property="Foreground" Value="#A78BFA"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="14,12"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+        <Style TargetType="DataGridCell">
+            <Setter Property="Foreground" Value="#F4F5FF"/>
+            <Setter Property="Background" Value="#1B2033"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="14,8"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+
+        <Style TargetType="DataGridRow">
+            <Setter Property="Background" Value="#1B2033"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#292F46"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="ScrollBar">
+            <Setter Property="Width" Value="8"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid Background="Transparent">
+                            <Track x:Name="PART_Track"
+                                   IsDirectionReversed="True">
+
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Command="ScrollBar.PageUpCommand"
+                                                  Opacity="0"
+                                                  IsTabStop="False"/>
+                                </Track.DecreaseRepeatButton>
+
+                                <Track.Thumb>
+                                    <Thumb>
+                                        <Thumb.Template>
+                                            <ControlTemplate TargetType="Thumb">
+                                                <Border x:Name="ThumbBorder"
+                                                        Background="#454D6B"
+                                                        CornerRadius="4"
+                                                        Margin="1"/>
+
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="ThumbBorder"
+                                                                Property="Background"
+                                                                Value="#A78BFA"/>
+                                                    </Trigger>
+
+                                                    <Trigger Property="IsDragging" Value="True">
+                                                        <Setter TargetName="ThumbBorder"
+                                                                Property="Background"
+                                                                Value="#7C5CFC"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Thumb.Template>
+                                    </Thumb>
+                                </Track.Thumb>
+
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Command="ScrollBar.PageDownCommand"
+                                                  Opacity="0"
+                                                  IsTabStop="False"/>
+                                </Track.IncreaseRepeatButton>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock Text="TEMPERATURE STUDIO"
+                       FontSize="13"
+                       FontWeight="Bold"
+                       Foreground="#A78BFA"/>
+
+            <TextBlock Text="Таблица температур"
+                       FontSize="32"
+                       FontWeight="Bold"
+                       Margin="0,8,0,0"/>
+
+            <TextBlock Text="Перевод градусов Цельсия в градусы Фаренгейта"
+                       FontSize="15"
+                       Foreground="#9CA3B8"
+                       Margin="0,5,0,0"/>
+        </StackPanel>
+
+        <Border Grid.Row="1"
+                Background="#1B2033"
+                CornerRadius="24"
+                Padding="24">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0"
+                           Text="ТАБЛИЦА ПЕРЕВОДА"
+                           FontSize="13"
+                           FontWeight="Bold"
+                           Foreground="#A78BFA"
+                           Margin="0,0,0,16"/>
+
+                <Border Grid.Row="1"
+                        Background="#252B42"
+                        CornerRadius="12"
+                        Padding="16"
+                        Margin="0,0,0,16">
+
+                    <TextBlock Text="F = 1.8 × C + 32"
+                               FontSize="20"
+                               FontWeight="SemiBold"
+                               Foreground="#5EEAD4"
+                               HorizontalAlignment="Center"/>
+                </Border>
+
+                <DataGrid x:Name="TemperatureDataGrid"
+                          Grid.Row="2"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True"
+                          CanUserAddRows="False"
+                          CanUserDeleteRows="False"
+                          CanUserReorderColumns="False"
+                          CanUserResizeRows="False"
+                          HeadersVisibility="Column"
+                          GridLinesVisibility="None"
+                          RowHeaderWidth="0"
+                          Background="#1B2033"
+                          BorderThickness="0"
+                          HorizontalGridLinesBrush="#292F46"
+                          VerticalGridLinesBrush="#292F46"
+                          SelectionMode="Single"
+                          SelectionUnit="FullRow"
+                          AlternationCount="2">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Цельсий (°C)"
+                                            Binding="{Binding Celsius}"
+                                            Width="*"/>
+
+                        <DataGridTextColumn Header="Фаренгейт (°F)"
+                                            Binding="{Binding Fahrenheit, StringFormat={}{0:F1}}"
+                                            Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
+
+        <TextBlock Grid.Row="2"
+                   Text="TEMPERATURE STUDIO  •  CELSIUS → FAHRENHEIT"
+                   Foreground="#68708C"
+                   FontSize="11"
+                   HorizontalAlignment="Center"
+                   Margin="0,14,0,0"/>
+    </Grid>
+</Window>

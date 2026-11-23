@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="../Task1/Task1.csproj" Id="55fb189a-94eb-4923-a756-8a57619ae4a0" />
+  <Project Path="../Task2/Task2.csproj" Id="014be9a1-2fb7-45b8-a4ff-787cd3f7e8a3" />
+  <Project Path="../Task3/Task3.csproj" Id="496d983d-4390-4a4b-a8b7-4b7e05ce6e38" />
+  <Project Path="../Task4/Task4.csproj" Id="aa046a1b-77eb-4b7f-91cf-0170cdbf872e" />
+</Solution>
